@@ -10,8 +10,14 @@ model thresholds, or feature lists.
 from datetime import datetime
 
 # ── API Keys ──────────────────────────────────────────────────────────────────
-NEWS_API_KEY: str = "593cac22e62b47299dfaf3533fe027c6"   # <-- replace if needed
+import os
+import streamlit as st
 
+NEWS_API_KEY: str = (
+    st.secrets.get("NEWS_API_KEY")          # Streamlit Cloud
+    or os.getenv("NEWS_API_KEY")            # local terminal / train.py
+    or ""
+)
 # ── Date Range ────────────────────────────────────────────────────────────────
 START_DATE: str = "2020-01-01"
 END_DATE:   str = datetime.today().strftime("%Y-%m-%d")
